@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.behindimagesmanage.dao.CountDao">
+    <insert id="insertOrUpdateAllCount">
+        INSERT INTO total_stats (total_upload, total_download, total_delete, user_uuid, date)
+        VALUES (#{totalUpload}, #{totalDownload}, #{totalDelete}, #{userUuid}, CURDATE())
+        ON DUPLICATE KEY UPDATE
+        <trim suffixOverrides=",">
+            <if test="totalUpload != 0">total_upload = total_upload + 1,</if>
+            <if test="totalDownload != 0">total_download = total_download + 1,</if>
+            <if test="totalDelete != 0">total_delete = total_delete + 1</if>
+        </trim>
+    </insert>
+
+
+
+    <insert id="insertOrUpdateFileCount" >
+        INSERT INTO file_statistics (file_id, reference_count, user_uuid, date)
+        VALUES (#{fileId}, 1, #{userUuid},CURDATE())
+        ON DUPLICATE KEY UPDATE
+                             reference_count = reference_count + 1;
+    </insert>
+
+
+
+
+</mapper>

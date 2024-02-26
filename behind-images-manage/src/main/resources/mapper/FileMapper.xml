@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chen.behindimagesmanage.dao.FileDao">
+
+    <!-- 定义一个查询语句 -->
+    <resultMap id="imageMetaDataResultMap" type="com.chen.behindimagesmanage.pojo.ImageMetaData">
+        <id property="id" column="id" />
+        <result property="md5" column="md5" />
+        <result property="aliyunUrl" column="aliyun_url" />
+        <result property="localUrl" column="local_url" typeHandler="com.chen.behindimagesmanage.handler.StringToListTypeHandler" />
+        <result property="version" column="version" />
+    </resultMap>
+    <resultMap id="imageMetaDataAddFileNameResultMap" type="com.chen.behindimagesmanage.pojo.ImageMetaDataAddFileName">
+        <id property="id" column="id" />
+        <result property="md5" column="md5" />
+        <result property="aliyunUrl" column="aliyun_url" />
+        <result property="localUrl" column="local_url" typeHandler="com.chen.behindimagesmanage.handler.StringToListTypeHandler" />
+        <result property="version" column="version" />
+        <result property="imageName" column="image_name"/>
+    </resultMap>
+
+    <select id="getAllImg" resultMap="imageMetaDataAddFileNameResultMap">
+        SELECT a.*, b.image_name
+        FROM image_metadata AS a
+                 LEFT JOIN (
+            SELECT md5, MIN(image_name) AS image_name
+            FROM image
+            GROUP BY md5
+        ) AS b ON a.md5 = b.md5;
+    </select>
+    <select id="getImg" resultMap="imageMetaDataResultMap">
+        SELECT * FROM image_metadata WHERE md5 = #{md5};
+    </select>
+
+
+<!--    &lt;!&ndash; 定义一个插入语句 &ndash;&gt;-->
+<!--    <insert id="insertUser" parameterType="com.example.model.User">-->
+<!--        INSERT INTO users (username, email) VALUES (#{username}, #{email})-->
+<!--    </insert>-->
+
+    <!-- 定义一个更新语句 -->
+    <parameterMap id="imageMetaDataParamMap" type="com.chen.behindimagesmanage.pojo.ImageMetaData">
+        <parameter property="id" jdbcType="INTEGER" javaType="java.lang.Integer" mode="IN"/>
+        <parameter property="md5" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN"/>
+        <parameter property="aliyunUrl" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN"/>
+        <parameter property="localUrl" typeHandler="com.chen.behindimagesmanage.handler.StringToListTypeHandler"/>
+        <parameter property="version" jdbcType="INTEGER" javaType="int" mode="IN"/>
+    </parameterMap>
+    <update id="updateLocalUrl"
+    >
+        UPDATE image_metadata SET  local_url= #{localUrl,typeHandler = com.chen.behindimagesmanage.handler.StringToListTypeHandler}, version = #{version} + 1 WHERE version = #{version}
+    </update>
+    <update id="updateAddLocalUrl"
+    >
+        UPDATE image_metadata SET  local_url= CONCAT(local_url,',',#{newLocalUrl}), version = image_metadata.version + 1 WHERE md5 = #{md5}
+    </update>
+
+    <insert id="insertImageMetadata">
+        INSERT INTO image_metadata (md5, aliyun_url, local_url, version)
+        VALUES (#{md5}, #{aliyunUrl}, #{localUrl, typeHandler=com.chen.behindimagesmanage.handler.StringToListTypeHandler}, 0)
+    </insert>
+
+
+    <!-- 查询记录是否存在 -->
+    <select id="checkIfMd5Exists" resultType="int">
+        SELECT COUNT(*) FROM image_metadata WHERE md5 = #{md5}
+    </select>
+
+<!--    &lt;!&ndash; 定义一个删除语句 &ndash;&gt;-->
+<!--    <delete id="deleteUser" parameterType="int">-->
+<!--        DELETE FROM users WHERE id = #{id}-->
+<!--    </delete>-->
+
+</mapper>

@@ -1,0 +1,35 @@
+{
+  "adminMenu": {
+    "items": [
+      {
+        "title": "首页",
+        "path": "/",
+        "icon": "home"
+      },
+      {
+        "title": "图库",
+        "path": "/picture",
+        "icon": "picture"
+      },
+      {
+        "title": "setting",
+        "path": "/setting",
+        "icon": "info"
+      }
+    ]
+  },
+  "userMenu": {
+    "items": [
+      {
+        "title": "首页",
+        "path": "/",
+        "icon": "home"
+      },
+      {
+        "title": "图库",
+        "path": "/picture",
+        "icon": "picture"
+      }
+    ]
+  }
+}

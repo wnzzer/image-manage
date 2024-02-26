@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+interfaceAccess:
+  second: 60
+  requestCount: 6000
+  lockTime: 3
+
+config:
+  k8s:
+    name: image-manage
+    service-name : image-manage-cluster-service
+    headless-service-name:  image-manage-headless-service
+    namespace: image-manage

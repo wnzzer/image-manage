@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.behindimagesmanage.dao.UserDao">
+    <insert id="putPicgoToken">
+        UPDATE direct_link_tokens
+        <set>
+            <trim  suffixOverrides=",">
+                <if test="linkToken != null">
+                    link_token = #{linkToken},
+                </if>
+                <if test="storePath != null">
+                    store_path = #{storePath},
+                </if>
+            </trim>
+        </set>
+        WHERE user_uuid = #{userUuid}
+    </insert>
+
+
+
+
+</mapper>

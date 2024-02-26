@@ -1,0 +1,3 @@
+<typeHandlers>
+    <typeHandler handler="com.chen.behindimagesmanage.handler.StringToListTypeHandler" javaType="java.util.List<java.lang.String>" jdbcType="VARCHAR"/>
+</typeHandlers>
