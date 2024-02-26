@@ -1,9 +1,5 @@
----
-title: 部署指南
-date: 2020-05-11 13:54:40
-permalink: /pages/793dcb
-article: false
----
+<h1>image-manage</h1>
+文档地址: <a herf="https://wnzzer.github.io/image-manage/"/>
 
 ::: warning 注意⚠️
 1. 你需要至少一个mysql数据库
