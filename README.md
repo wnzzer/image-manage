@@ -1,7 +1,6 @@
 <h1>image-manage</h1>
-文档地址: <a herf="https://wnzzer.github.io/image-manage/"/>
-
-::: warning 注意⚠️
+<a href="https://wnzzer.github.io/image-manage/">文档</a>
+<h2> warning 注意⚠️</h2>
 1. 你需要至少一个mysql数据库
 2. 你需要至少一个redis数据库
 3. 你需要一个版本至少 kubernetes 1.29的集群(集群可选)
@@ -29,22 +28,22 @@ docker run -p 8080:8080 \
 ```
 > 仓库地址： <https://github.com/wnzzer/image-manage>
 
-
   </code-block>
 </code-group>
 
-::: tip
+<h2> tip⚠️</h2>
+
 
 1. 由于springboot的配置替换策略，如果要替换更多的springboot参数配置也是可行的
 
-:::
 
-## 集群部署部署(k8s)
-::: tip
+## 集群部署部署(k8s)‘
+
+<h2> tip⚠️</h2>
+
 
 1. 这是应用监控资源必须的组件，如果没有该组件，k8s metrics api将无法工作，image-manage将无法搜集pod资源信息
 
-:::
 1. 安装最metrics server：
 ```sh
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
@@ -177,14 +176,22 @@ spec:
 kubectl apply -f image-manage.yaml
 ```
 
-:::tip
 
-  1. 这里同样需要把redis，mysql修改成自己的配置
-  2. 这里需要有自己的pv供应器，由于是pv动态创建，所以需要搭配自动供应器给statusfulSet创建pv，示例中使用的是nfs
-  3. image-manage 需要搭配 k8s 配置进行对k8s api的访问，这里实例使用的是admin.conf,使用configmap挂载到容器里，如果想要更细致的权限划分，请将权限配置至少给予 image-manage级别的权限。
-  4. 创建的k8s用户文件请将命名为admin.conf,因为应用里指定了k8s配置文件为admin.conf，其他名称会无法读取。
-:::
+
+  >1. 这里同样需要把redis，mysql修改成自己的配置
+  >2. 这里需要有自己的pv供应器，由于是pv动态创建，所以需要搭配自动供应器给statusfulSet创建pv，示例中使用的是nfs
+  >3. image-manage 需要搭配 k8s 配置进行对k8s api的访问，这里实例使用的是admin.conf,使用configmap挂载到容器里，如果想要更细致的权限划分，请将权限配置至少给予 image-manage级别的权限。
+  >4. 创建的k8s用户文件请将命名为admin.conf,因为应用里指定了k8s配置文件为admin.conf，其他名称会无法读取。
+
 
 3. 访问
 
 我们可以直接在k8s中部署nginx，反代 image-manage cluster ip，进行访问，
+
+## 3. 运行web ui
+```shell
+cd font-userui
+npm i
+npm run dev
+```
+后面需要把public里的base url改成
