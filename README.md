@@ -1,55 +1,52 @@
-<h1>image-manage</h1>
-<a href="https://wnzzer.github.io/image-manage/">文档</a>
-<h2> warning 注意⚠️</h2>
-1. 你需要至少一个mysql数据库
-2. 你需要至少一个redis数据库
-3. 你需要一个版本至少 kubernetes 1.29的集群(集群可选)
+# image-manage 图像管理应用
 
-:::
+图像管理应用提供了一个方便管理图片的平台，支持单机和Kubernetes集群部署。请确保您至少拥有一个MySQL数据库和一个Redis数据库，以及一个至少为Kubernetes 1.29版本的集群（如果选择集群部署）。
 
+[文档及更多信息](https://wnzzer.github.io/image-manage/)
 
+## 注意⚠️
 
-## 单机部署(docker)
-<code-group>
-  <code-block title="docker拉取安装" active>
+1. 需要至少一个MySQL数据库
+2. 需要至少一个Redis数据库
+3. 如果采用集群部署，需要一个版本至少为Kubernetes 1.29的集群
+
+## 单机部署（Docker）
+
+使用Docker拉取并运行image-manage：
 
 ```bash
-# clone the project
 docker run -p 8080:8080 \
- -v  你的数据目录:/app\
-  -e CONFIG_ISCLUSTERMODEENABLED=flase \
-  -e SPRING_DATASOURCE_URL=jdbc:mysql://192.168.0.254:3306/image_manage?userUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai \
-  -e SPRING_DATASOURCE_USERNAME=root \
-  -e SPRING_DATASOURCE_PASSWORD=123456 \
-  -e SPRING_REDIS_HOST=192.168.0.254 \
-  -e SPRING_REDIS_PASSWORD=123456 \
-  wnzzer/image-manage:latest
-# 这里配置数据挂载卷，mysql，数据库和redis数据库
+ -v 你的数据目录:/app\
+ -e CONFIG_ISCLUSTERMODEENABLED=false \
+ -e SPRING_DATASOURCE_URL=jdbc:mysql://192.168.0.254:3306/image_manage?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai \
+ -e SPRING_DATASOURCE_USERNAME=root \
+ -e SPRING_DATASOURCE_PASSWORD=123456 \
+ -e SPRING_REDIS_HOST=192.168.0.254 \
+ -e SPRING_REDIS_PASSWORD=123456 \
+ wnzzer/image-manage:latest
 ```
 > 仓库地址： <https://github.com/wnzzer/image-manage>
 
   </code-block>
 </code-group>
 
-<h2> tip⚠️</h2>
-
-
-1. 由于springboot的配置替换策略，如果要替换更多的springboot参数配置也是可行的
+### 提示
+- 由于Spring Boot的配置替换策略，可以根据需要替换更多的Spring Boot参数配置。
 
 
 ## 集群部署部署(k8s)‘
 
-<h2> tip⚠️</h2>
+### 前置要求
 
 
-1. 这是应用监控资源必须的组件，如果没有该组件，k8s metrics api将无法工作，image-manage将无法搜集pod资源信息
+- 安装metrics server，以支持应用监控资源。如果没有该组件，Kubernetes metrics API将无法工作，image-manage也将无法收集Pod资源信息。
 
-1. 安装最metrics server：
 ```sh
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 ```
 
-2. 创建image-manage应用
+### 部署image-manage
+
 ```sh
 wget  https://github.com/wnzzer/image-manage/releases/latest/download/image-manage-yaml
 ```
@@ -184,14 +181,13 @@ kubectl apply -f image-manage.yaml
   >4. 创建的k8s用户文件请将命名为admin.conf,因为应用里指定了k8s配置文件为admin.conf，其他名称会无法读取。
 
 
-3. 访问
+## 访问
 
 我们可以直接在k8s中部署nginx，反代 image-manage cluster ip，进行访问，
 
-## 3. 运行web ui
+## 运行web ui
 ```shell
 cd font-userui
 npm i
 npm run dev
 ```
-后面需要把public里的base url改成
