@@ -40,9 +40,7 @@
 <div align="center">
   <img src="./static/3.png" alt="项目Logo" width="200"/>
 </div>
-<div align="center">
-  <img src="./static/4.png" alt="项目Logo" width="200"/>
-</div>
+
 
 ## 本地调试
 
