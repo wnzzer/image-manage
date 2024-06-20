@@ -4,7 +4,7 @@
 </div>
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
-![Kubernetes](https://img.shields.io/badge/Kubernetes-v1.29-blue.svg)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-v1.28-blue.svg)
 ![Docker](https://img.shields.io/badge/Docker-20.10-blue.svg)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.6.13-brightgreen.svg)
 ![Redis](https://img.shields.io/badge/Redis-7.2.4-red.svg)
