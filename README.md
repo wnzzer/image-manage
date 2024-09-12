@@ -16,6 +16,11 @@
 图像管理应用提供了一个方便管理图片的平台，支持单机和Kubernetes集群部署。请确保您至少拥有一个MySQL数据库和一个Redis数据库，以及一个至少为Kubernetes 1.29版本的集群（如果选择集群部署）。
 
 [文档及更多信息](https://wnzzer.github.io/image-manage/)
+该项目为整合仓库
+1. 后端仓库
+https://gitee.com/chenbaifu/imgae-manage.git
+2. 前端仓库
+https://gitee.com/chenbaifu/font-userui.git
 
 # 项目页展示
 
