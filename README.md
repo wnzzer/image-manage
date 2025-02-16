@@ -27,24 +27,35 @@ https://gitee.com/chenbaifu/font-userui.git
 ## 1.首页
 
 <div align="center">
-  <img src="./static/index.png" alt="项目Logo" width="200"/>
+  <img src="./static/index.png" alt="项目Logo" width="300"/>
 </div>
 
 ## 2. 用户管理
 
 <div align="center">
-  <img src="./static/1.png" alt="项目Logo" width="200"/>
+  <img src="./static/1.png" alt="项目Logo" width="300"/>
 </div>
 
 ## 3. token管理
 <div align="center">
-  <img src="./static/2.png" alt="项目Logo" width="200"/>
+  <img src="./static/2.png" alt="项目Logo" width="300"/>
 </div>
 
 ## 4. 图片在线管理页
 <div align="center">
-  <img src="./static/3.png" alt="项目Logo" width="200"/>
+  <img src="./static/3.png" alt="项目Logo" width="300"/>
 </div>
+
+## 5. 集群元数据
+<div align="center">
+  <img src="./static/5.png" alt="项目Logo" width="300"/>
+</div>
+
+## 6. 集群运行时
+<div align="center">
+  <img src="./static/6.png" alt="项目Logo" width="300"/>
+</div>
+
 
 
 ## 本地调试
